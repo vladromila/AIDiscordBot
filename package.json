@@ -1,0 +1,18 @@
+{
+  "name": "aibot",
+  "version": "1.0.0",
+  "description": "My first ever bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vlad Romila",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "nodemon": "^1.18.6",
+    "opusscript": "0.0.6",
+    "ytdl-core": "^0.28.0"
+  }
+}
