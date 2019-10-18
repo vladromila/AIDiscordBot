@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const botConfig = require('./botConfig.json');
+const botConfig = require('./botconfig.json');
 const YTDL = require('ytdl-core');
 
 const bot = new Discord.Client({ disableEveryone: true })
@@ -14,11 +14,12 @@ function play(connection, message) {
     server.dispatcher = connection.playStream(YTDL(server.queue[0], { filter: 'audioonly' }));
     servers[message.guild.id].queue.shift();
     servers[message.guild.id].dispatcher.on("end", () => {
-        if (servers[message.guild.id].queue.length>0)
+        if (servers[message.guild.id].queue.length > 0)
             play(connection, message)
         else {
-            console.log('Am fost aici!!!!!!!!!!!')
-            connection.disconnect();
+            setTimeout(() => {
+                connection.disconnect();
+            }, 5000)
         }
     })
 }
@@ -60,11 +61,11 @@ bot.on("message", async message => {
                         }
                     var server = servers[message.guild.id]
                     server.queue.push(messageArray[1]);
-                        return message.member.voiceChannel.join().then(connection => {
-                            if(!message.member.voiceChannel.connection.dispatcher)
+                    return message.member.voiceChannel.join().then(connection => {
+                        if (!message.member.voiceChannel.connection.dispatcher)
                             play(connection, message)
-                        })
-                    
+                    })
+
                 }
             case `${prefix}leave`:
                 {
